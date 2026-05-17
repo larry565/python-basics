@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>猜数字游戏</title>
+</head>
+<body>
+    <h2>🎮 猜数字（1~50）</h2>
+
+    <input id="input" type="number">
+    <button onclick="guess()">猜！</button>
+
+    <p id="result"></p>
+
+    <script>
+        let secret = Math.floor(Math.random() * 50) + 1;
+        let attempts = 0;
+        let maxAttempts = 5;
+
+        function guess() {
+            let value = document.getElementById("input").value;
+            let result = document.getElementById("result");
+
+            if (value === "") {
+                result.innerText = "请输入数字！";
+                return;
+            }
+
+            value = parseInt(value);
+            attempts++;
+
+            if (value === secret) {
+                result.innerText = "🎉 猜对了！";
+            } else if (value > secret) {
+                result.innerText = "太大了";
+            } else {
+                result.innerText = "太小了";
+            }
+
+            if (attempts >= maxAttempts && value !== secret) {
+                result.innerText = "❌ 游戏结束！答案是 " + secret;
+            }
+        }
+    </script>
+</body>
+</html>
